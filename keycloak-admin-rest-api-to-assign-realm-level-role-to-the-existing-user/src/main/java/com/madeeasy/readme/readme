@@ -1,0 +1,185 @@
+
+// json
+============================================ This is standard json ======================================
+{
+    "enabled": true,
+    "username": "pabitra@bera",
+    "email": "pabitra@gmail.com",
+    "firstName": "Pabitra",
+    "lastName": "Bera",
+    "credentials": [
+        {
+            "type": "password",
+            "value": "mypass@123",
+            "temporary": false
+        }
+    ],
+    "requiredActions": [
+        "CONFIGURE_TOTP",
+        "VERIFY_EMAIL"
+    ],
+    "groups": [],
+    "attributes": {
+        "local": [
+            "en"
+        ]
+    }
+}
+==================================================== OR =================================================================
+{
+    "username": "frank",
+    "enabled": true,
+    "realmRoles": [
+        "user",
+        "offline_access"
+    ],
+    "attributes": {
+        "uid": [
+            "4010"
+        ],
+        "homedir": [
+            "/home/frank"
+        ],
+        "shell": [
+            "/sbin/nologin"
+        ]
+    }
+}
+
+
+================================================= Add realm level role to user ======================================================
+
+# Know about all supported APIs from =>
+              https://www.npmjs.com/package/keycloak-admin
+              https://documenter.getpostman.com/view/7294517/SzmfZHnd
+# Reference from :: https://stackoverflow.com/questions/73721142/when-creating-a-new-user-set-realmroles-keycloak-admin-rest-api
+
+#1) get access_token
+
+    POST http://localhost:8080/realms/master/protocol/openid-connect/token
+    curl --location 'http://localhost:8080/realms/master/protocol/openid-connect/token' \
+    --header 'Content-Type: application/x-www-form-urlencoded' \
+    --data-urlencode 'username=admin' \
+    --data-urlencode 'password=admin' \
+    --data-urlencode 'grant_type=password' \
+    --data-urlencode 'client_id=admin-cli'
+    ============================================== OR ==========================================
+    Body > x-www-form-urlencoded
+    {
+        "username": "admin",
+        "password": "admin",
+        "grant_type": "password",
+        "client_id": "admin-cli"
+    }
+ # Click Send Button :
+  Now you will see :
+
+{
+    "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiRkE4ZXUzM2wyWEV3OU1ldkpyWkF2VkhZZWtCa1VRT0I1NC1IT2ViNjA0In0.eyJleHAiOjE2ODcxNDQ2MTcsImlhdCI6MTY4NzE0MTAxNywianRpIjoiMjExZTJhNjAtMThhZi00YjRiLTlmMDAtYzFhYjhlN2MyZjFmIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiZWU1OWFkOS01YzdjLTQwYTctYTVlMy00NjcxNWU0Y2ViMGYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZjk3ZWRlYTQtMzQ2Zi00Y2I2LTgzNjMtNjI5Yjg2OTBhYzFhIiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6ImY5N2VkZWE0LTM0NmYtNGNiNi04MzYzLTYyOWI4NjkwYWMxYSIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6InBhYml0cmFiZXJhMjAwMUBnbWFpbC5jb20ifQ.nxo8y6jR9wtxi-YA8NzMlL6pAZ9wiVTbYmEgjY77jSiZe4XM66gSrJ1hyM2gPbS-VZf7tP0eVbvS2N05L2VRTanv6qwMI42sOuf9BnyfwUDdT5KeXv6SJ7ZdKvTCJlGXptqCK8hl59kvSkLgGcq_J0D4Wa84I_V3HDt4qYnOoifbUWXvd4A2ZKgoQI_9nR3gFPm-l0rWfGEaDekWWCfO_y_fBRN5XbYaHexR-LTCQWNYE11NWAdVjE-GHhlhhbOnstFo--RXBizZA0uiQSjo0aaifMoovtYCNmmFzkCqoj50iPbHCCILKwmMjd2IIeFvES7mbLHK4AeLafL83pzKrQ",
+    "expires_in": 3600,
+    "refresh_expires_in": 1800,
+    "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjM2NmNWIyNC0wZjE2LTRmZDYtODEzYy1mZTY2ODRiZWY0N2IifQ.eyJleHAiOjE2ODcxNDI4MTcsImlhdCI6MTY4NzE0MTAxNywianRpIjoiNTU4ZGZiMTgtNGQwNy00ODBiLWI2OGItNjI1MWUyODRkMDg2IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL21hc3RlciIsInN1YiI6ImJlZTU5YWQ5LTVjN2MtNDBhNy1hNWUzLTQ2NzE1ZTRjZWIwZiIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiZjk3ZWRlYTQtMzQ2Zi00Y2I2LTgzNjMtNjI5Yjg2OTBhYzFhIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiZjk3ZWRlYTQtMzQ2Zi00Y2I2LTgzNjMtNjI5Yjg2OTBhYzFhIn0.MN_g6T2F586hDqSPVpO9i28vyGQIvln0dNo0ELkcez8",
+    "token_type": "Bearer",
+    "not-before-policy": 0,
+    "session_state": "f97edea4-346f-4cb6-8363-629b8690ac1a",
+    "scope": "profile email"
+}
+#2) create user (OR if User may already exist don't need to create the same user) :: POST http://localhost:8080/admin/realms/testrealm/users
+
+{
+    "createdTimestamp": 1588880747548,
+    "username": "Strange",
+    "enabled": true,
+    "totp": false,
+    "emailVerified": true,
+    "firstName": "Stephen",
+    "lastName": "Strange",
+    "email": "drstranger@marvel.com",
+    "disableableCredentialTypes": [],
+    "requiredActions": [],
+    "notBefore": 0,
+    "access": {
+        "manageGroupMembership": true,
+        "view": true,
+        "mapRoles": true,
+        "impersonate": true,
+        "manage": true
+    }
+}
+
+#3) get available realm level roles which you want to add to user ::
+  GET http://localhost:8080/admin/realms/testrealm/roles
+  Authorization > Bearer Token > Token : <access_token>
+
+ you will see like this ::
+ [
+     {
+         "id": "f2c5c44a-f86d-4b5f-a6af-b19b5081471d",
+         "name": "offline_access",
+         "description": "${role_offline-access}",
+         "composite": false,
+         "clientRole": false,
+         "containerId": "testrealm"
+     },
+     {
+         "id": "3db52bf5-5443-4148-ab49-86c402cf81af",
+         "name": "uma_authorization",
+         "description": "${role_uma_authorization}",
+         "composite": false,
+         "clientRole": false,
+         "containerId": "testrealm"
+     },
+     {
+         "id": "f7a02d72-6e57-48a5-a533-d984ae9af14f",
+         "name": "USER",
+         "description": "USER ROLE IN REALM",
+         "composite": false,
+         "clientRole": false,
+         "containerId": "testrealm"
+     },
+     {
+         "id": "51e97f95-2f25-4a17-8c27-453a776547f7",
+         "name": "default-roles-testrealm",
+         "description": "${role_default-roles}",
+         "composite": true,
+         "clientRole": false,
+         "containerId": "testrealm"
+     }
+ ]
+
+
+#4) now add realm level role to user ::
+  POST http://localhost:8080/admin/realms/{realm_name}/users/{user_id}/role-mappings/realm
+  Authorization > Bearer Token > Token : <access_token>
+  Body > raw > json
+  this below role is picked up from the list of available realm level roles (i.e from #3) i.e. GET http://localhost:8080/admin/realms/testrealm/roles
+  [
+      {
+          "id": "f7a02d72-6e57-48a5-a533-d984ae9af14f",
+          "name": "USER",
+          "description": "USER ROLE IN REALM",
+          "composite": false,
+          "clientRole": false,
+          "containerId": "testrealm"
+      }
+  ]
+Good Luck you have added role to the user....
+
+Note if you want to play with the user and all the required actions you can check this link https://www.npmjs.com/package/keycloak-admin
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
