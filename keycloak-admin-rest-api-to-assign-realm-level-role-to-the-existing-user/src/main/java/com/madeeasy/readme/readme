@@ -63,6 +63,36 @@
     --data-urlencode 'password=admin' \
     --data-urlencode 'grant_type=password' \
     --data-urlencode 'client_id=admin-cli'
+
+  for windows :: 
+curl --location ^
+  "http://localhost:8080/realms/master/protocol/openid-connect/token" ^
+  --header "Content-Type: application/x-www-form-urlencoded" ^
+  --data-urlencode "username=admin" ^
+  --data-urlencode "password=admin" ^
+  --data-urlencode "grant_type=password" ^
+  --data-urlencode "client_id=admin-cli" ^ 
+
+after you have finished with your command hit 2 times to get access tokens like this :: 
+C:\Users\PABITRA>curl --location ^
+More?   "http://localhost:8080/realms/master/protocol/openid-connect/token" ^
+More?   --header "Content-Type: application/x-www-form-urlencoded" ^
+More?   --data-urlencode "username=admin" ^
+More?   --data-urlencode "password=admin" ^
+More?   --data-urlencode "grant_type=password" ^
+More?   --data-urlencode "client_id=admin-cli" ^
+More?
+More?
+{
+  "access_token": "eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJiRkE4ZXUzM2wyWEV3OU1ldkpyWkF2VkhZZWtCa1VRT0I1NC1IT2ViNjA0In0.eyJleHAiOjE2ODcxNDcwNDAsImlhdCI6MTY4NzE0MzQ0MCwianRpIjoiOGUwMWU5MWEtNGRjOS00ZTFhLTg3NjgtYmI3Y2YwNjBmYmM4IiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJzdWIiOiJiZWU1OWFkOS01YzdjLTQwYTctYTVlMy00NjcxNWU0Y2ViMGYiLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiMjY0MmJjNTUtMWE0OC00ODg2LWJiNzgtODc1ZDMwNzExOTBkIiwiYWNyIjoiMSIsInNjb3BlIjoicHJvZmlsZSBlbWFpbCIsInNpZCI6IjI2NDJiYzU1LTFhNDgtNDg4Ni1iYjc4LTg3NWQzMDcxMTkwZCIsImVtYWlsX3ZlcmlmaWVkIjpmYWxzZSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW4iLCJnaXZlbl9uYW1lIjoiIiwiZmFtaWx5X25hbWUiOiIiLCJlbWFpbCI6InBhYml0cmFiZXJhMjAwMUBnbWFpbC5jb20ifQ.l9jtPm0ph4GZcnti7psixrAUWiCPBXz7_If3TgOetETCxsQ-HjwDM0RC7S15-zP2FyV1w7lEK7m1ENYR4XgxYaGtxzJ1fAUMVy8_f663B7IFgQp0dlxsVpkpA4ZL_Af2Pq-y00qw4XatXYS-i2Tdsrk31nYuAFRaFk4T0Sh5NVLSupLgMeVeOmiSg_4EI7bxS0snXWJ4abHdjnBQ3wRR1Ue4B4J1c8Dhqz7pHzepP_JJtm490mkCJcDNVQ9IvviD3w9AymlWaMNb8XRPLTjC_81_TwXA53-Rkpa5SnVWH82m8Snr54nbRsF3YV75UooyGYoG2f7lVxaT6e23fQWWZA",
+  "expires_in": 3600,
+  "refresh_expires_in": 1800,
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJjM2NmNWIyNC0wZjE2LTRmZDYtODEzYy1mZTY2ODRiZWY0N2IifQ.eyJleHAiOjE2ODcxNDUyNDAsImlhdCI6MTY4NzE0MzQ0MCwianRpIjoiNDcyN2ZjNzItZTI4OS00ZWI4LWEwZTMtOTgzZTg1Y2YzOTkyIiwiaXNzIjoiaHR0cDovL2xvY2FsaG9zdDo4MDgwL3JlYWxtcy9tYXN0ZXIiLCJhdWQiOiJodHRwOi8vbG9jYWxob3N0OjgwODAvcmVhbG1zL21hc3RlciIsInN1YiI6ImJlZTU5YWQ5LTVjN2MtNDBhNy1hNWUzLTQ2NzE1ZTRjZWIwZiIsInR5cCI6IlJlZnJlc2giLCJhenAiOiJhZG1pbi1jbGkiLCJzZXNzaW9uX3N0YXRlIjoiMjY0MmJjNTUtMWE0OC00ODg2LWJiNzgtODc1ZDMwNzExOTBkIiwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiMjY0MmJjNTUtMWE0OC00ODg2LWJiNzgtODc1ZDMwNzExOTBkIn0.ah-FQ2l0KTKZqT-HZS6uQ2AgaKeOaKiZdAzRqOE2BJw",
+  "token_type": "Bearer",
+  "not-before-policy": 0,
+  "session_state": "2642bc55-1a48-4886-bb78-875d3071190d",
+  "scope": "profile email"
+}
     ============================================== OR ==========================================
     Body > x-www-form-urlencoded
     {
