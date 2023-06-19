@@ -84,7 +84,7 @@
     "session_state": "f97edea4-346f-4cb6-8363-629b8690ac1a",
     "scope": "profile email"
 }
-#2) create user (OR if User already exists don't need to create the same user) :: POST http://localhost:8080/admin/realms/testrealm/users
+#2) create user (OR if User already exists no need to create the same user) :: POST http://localhost:8080/admin/realms/testrealm/users
 
 {
     "createdTimestamp": 1588880747548,
