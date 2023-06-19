@@ -152,7 +152,8 @@
   POST http://localhost:8080/admin/realms/{realm_name}/users/{user_id}/role-mappings/realm
   Authorization > Bearer Token > Token : <access_token>
   Body > raw > json
-  this below role is picked up from the list of available realm level roles (i.e from #3) i.e. GET http://localhost:8080/admin/realms/testrealm/roles
+  this below role is picked up (as here i want to add relam level role i.e. 'USER') from the list of available realm level roles 
+  (i.e from #3) i.e. GET http://localhost:8080/admin/realms/testrealm/roles
   [
       {
           "id": "f7a02d72-6e57-48a5-a533-d984ae9af14f",
